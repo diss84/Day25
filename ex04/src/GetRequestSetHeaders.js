@@ -1,0 +1,28 @@
+//GetRequestSetHeaders
+import React from 'react';
+//class
+class GetRequestSetHeaders extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { totalReactPackages: null };
+    }
+//Didmount
+componentDidMount() {
+    const headers = { 'Content-type': 'aplication.json'}
+    fetch('https://api.npms.io/v2/search?q=react', { headers })
+    .then(response => response.json() )
+    .then(data => this.setState({ totalReactPackages: data.total }));
+}
+//render
+render() {
+    const { totalReactPackages } = this.state;
+    return (
+        <div className='card text-center m-3'>
+            <h5 className='card-header'>GET Request with Set Headers</h5>
+                <div className='card-body'>Total packages: {totalReactPackages}
+                  </div>
+        </div>
+    );
+}
+}
+export default GetRequestSetHeaders; // export
